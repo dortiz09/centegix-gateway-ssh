@@ -46,37 +46,9 @@ echo "4. Default Gateway: $DEFAULT_GW"
 ping -c 2 -I eth0.2 -W 2 $DEFAULT_GW >/dev/null 2>&1
 [ $? -eq 0 ] && echo "   Ping Test to $DEFAULT_GW is Reachable" || echo "   Ping Test to $DEFAULT_GW is Unreachable"
 
-# Step 5: Connectivity Test via eth0.2
+# Step 5: Active connections (filtered by eth0.2 IP)
 echo ""
-echo "5. Connectivity Test via eth0.2:"
-
-# General Internet / Centegix connectivity
-for HOSTNAME in google.com centegix.com; do
-  for PORT in 80 443; do
-    nc -zvw2 $HOSTNAME $PORT >/dev/null 2>&1
-    if [ $? -eq 0 ]; then
-      printf "   %-40s : Reachable\n" "$HOSTNAME:$PORT"
-    else
-      printf "   %-40s : Unreachable\n" "$HOSTNAME:$PORT"
-    fi
-  done
-done
-
-# WISDM / V2 Gateway Remote Management
-for IP in 52.8.200.52 52.52.247.202 54.176.253.249 54.177.127.136 54.215.92.247 54.241.17.58; do
-  for PORT in 22 443 8443 8883; do
-    nc -zvw2 $IP $PORT >/dev/null 2>&1
-    if [ $? -eq 0 ]; then
-      printf "   %-40s : Reachable\n" "$IP:$PORT"
-    else
-      printf "   %-40s : Unreachable\n" "$IP:$PORT"
-    fi
-  done
-done
-
-# Step 6: Active connections (filtered by eth0.2 IP)
-echo ""
-echo "6. Active Connections (Bound to $PRIMARY_IP):"
+echo "5. Active Connections (Bound to $PRIMARY_IP):"
 if [ -n "$PRIMARY_IP" ]; then
   netstat -anp 2>/dev/null | grep "$PRIMARY_IP" | sed 's/^/   /'
 else
