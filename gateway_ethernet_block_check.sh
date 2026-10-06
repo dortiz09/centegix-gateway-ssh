@@ -211,10 +211,9 @@ else
         echo "Ethernet has a valid IP, reachable gateway, and all tested TCP endpoints responded."
         echo "If the gateway is still reporting cellular, investigate the gateway's failover/detection logic."
     else
-        echo "POSSIBLE EXTERNAL BLOCK."
-        echo "$TCP_FAILURES TCP test failed; Centegix services are otherwise reachable."
-        echo "Ethernet connectivity is functioning normally."
-        echo "Review firewall/ACL/filtering for the failed endpoint."
+        echo "ETHERNET CONNECTIVITY APPEARS HEALTHY."
+        echo "$TCP_FAILURES TCP test(s) failed; other Centegix services are reachable over Ethernet."
+        echo "Investigate the failed endpoint(s) separately."
     fi
 fi
 
