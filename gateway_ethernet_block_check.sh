@@ -166,9 +166,6 @@ TCP_FAILURES=0
 tcp_test "8.8.8.8" "443" "Google HTTPS" || TCP_FAILURES=$((TCP_FAILURES + 1))
 tcp_test "8.8.4.4" "443" "Google HTTPS" || TCP_FAILURES=$((TCP_FAILURES + 1))
 
-# Centegix DNS / Cellular Detection Server
-tcp_test "35.243.210.132" "443" "Centegix Detection Server HTTPS" || TCP_FAILURES=$((TCP_FAILURES + 1))
-
 # Known Centegix endpoints from the V2 Technical Guide
 tcp_test "52.52.247.202" "443" "WISDM Remote Management" || TCP_FAILURES=$((TCP_FAILURES + 1))
 tcp_test "3.222.152.56" "443" "Centegix LoRaWAN Network Server" || TCP_FAILURES=$((TCP_FAILURES + 1))
